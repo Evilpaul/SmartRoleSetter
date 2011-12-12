@@ -43,21 +43,17 @@ local function CheckRole(force)
 		elseif (iPTT == 2) then role = sRoleTank; end
 		elseif (iPTT == 3) then role = sRoleDmg; end
 	elseif (pc == 'PRIEST') then
-		if (iPTT == 1) then role = sRoleHeal; end
-		elseif (iPTT == 2) then role = sRoleHeal; end
+		if (iPTT == 1 or iPTT == 2) then role = sRoleHeal; end
 		elseif (iPTT == 3) then role = sRoleDmg; end
 	elseif (pc == 'SHAMAN') then
-		if (iPTT == 1) then role = sRoleDmg; end
-		elseif (iPTT == 2) then role = sRoleDmg; end
+		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg; end
 		elseif (iPTT == 3) then role = sRoleHeal; end
 	elseif (pc == 'WARRIOR') then
-		if (iPTT == 1) then role = sRoleDmg; end
-		elseif (iPTT == 2) then role = sRoleDmg; end
+		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg; end
 		elseif (iPTT == 3) then role = sRoleTank; end
 	elseif (pc == 'DEATHKNIGHT') then
 		if (iPTT == 1) then role = sRoleTank; end
-		elseif (iPTT == 2) then role = sRoleDmg; end
-		elseif (iPTT == 3) then role = sRoleDmg; end
+		elseif (iPTT == 2 or iPTT == 3) then role = sRoleDmg; end
 	end
 
 	--local canBeTank, canBeHealer, canBeDamager = UnitGetAvailableRoles('player');	
