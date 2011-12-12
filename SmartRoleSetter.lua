@@ -1,10 +1,3 @@
--------------------------------------------------------------------------------
--- SmartRoleSetter
--- Created by Aeldra (EU-Proudmoore)
---
--- Sets automatically your role in the raid based on your skill tree.
--------------------------------------------------------------------------------
-
 SLASH_SMARTROLESETTER1 = "/srs";
 SLASH_SMARTROLESETTER2 = "/srole";
 
