@@ -10,12 +10,13 @@ local doCheck = false;
 local tTime = 0;
 local isInit = false;
 
+local _, pc = UnitClass('player');
 
 local function CheckRole(force)
 	if (not force and role ~= sRoleNone) then return; end
 
 	local cr = 0;
-	local _, pc = UnitClass('player');
+
 	local iPTT = GetPrimaryTalentTree();
 	local roleOld = UnitGroupRolesAssigned('player');
 
