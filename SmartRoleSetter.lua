@@ -23,10 +23,7 @@ local function CheckRole(force)
 	local iPTT = GetPrimaryTalentTree();
 	local roleOld = UnitGroupRolesAssigned('player');
 
-	--print('Current role = '..roleOld);
-
 	if (iPTT == nil) then
-		--print('No primary talent tree found!');
 		role = sRoleNone;
 		return;
 	end
@@ -69,7 +66,6 @@ local function CheckRole(force)
 	--local canBeTank, canBeHealer, canBeDamager = UnitGetAvailableRoles('player');	
 	if (roleOld ~= role) then
 		isRoleSet = false;
-		--print('Detected role = '..role);
 	end
 end
 
@@ -78,12 +74,10 @@ local function SetRole(r, isPoll)
 	if (r == nil or r == sRoleNone or isRoleSet or (not isPoll and GetNumRaidMembers() <= 0)) then return; end
 	isRoleSet = true;
 	UnitSetRole('player', r);
-	--print('Role set to -> '..r);
 end
 
 
 function SmartRoleSetter_OnEvent(self, event, ...)
-	--print('SmartRoleSetter'..event);
 	if (not isInit) then return; end
 	if (not _O.isOn) then return; end
 
