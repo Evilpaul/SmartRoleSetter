@@ -28,7 +28,7 @@ local function CheckRole(force)
 	if (pc == 'ROGUE' or pc == 'HUNTER' or pc == 'MAGE' or pc == 'WARLOCK') then
 		role = sRoleDmg;
 	elseif (pc == 'DRUID') then
-		if (iPTT == 1) then role = sRoleDmg; end
+		if (iPTT == 1) then role = sRoleDmg;
 		elseif (iPTT == 2) then
 			_, _, _, _, cr = GetTalentInfo(iPTT, 19);
 			if (cr == 2) then
@@ -36,23 +36,22 @@ local function CheckRole(force)
 			else
 				role = sRoleTank;
 			end
-		end
 		elseif (iPTT == 3) then role = sRoleHeal; end
 	elseif (pc == 'PALADIN') then
-		if (iPTT == 1) then role = sRoleHeal; end
-		elseif (iPTT == 2) then role = sRoleTank; end
+		if (iPTT == 1) then role = sRoleHeal;
+		elseif (iPTT == 2) then role = sRoleTank;
 		elseif (iPTT == 3) then role = sRoleDmg; end
 	elseif (pc == 'PRIEST') then
-		if (iPTT == 1 or iPTT == 2) then role = sRoleHeal; end
+		if (iPTT == 1 or iPTT == 2) then role = sRoleHeal;
 		elseif (iPTT == 3) then role = sRoleDmg; end
 	elseif (pc == 'SHAMAN') then
-		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg; end
+		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg;
 		elseif (iPTT == 3) then role = sRoleHeal; end
 	elseif (pc == 'WARRIOR') then
-		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg; end
+		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg;
 		elseif (iPTT == 3) then role = sRoleTank; end
 	elseif (pc == 'DEATHKNIGHT') then
-		if (iPTT == 1) then role = sRoleTank; end
+		if (iPTT == 1) then role = sRoleTank;
 		elseif (iPTT == 2 or iPTT == 3) then role = sRoleDmg; end
 	end
 
