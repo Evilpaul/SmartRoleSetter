@@ -1,13 +1,9 @@
 ## Interface: 40300
-## Title: Smart|cffffffffRoleSetter|r by |cff00ff00Aeldra|r
-## Version: 4.3a
-## Author: |cff20d2ffAeldra|r (EU-Proudmoore)
-## Notes: Sets automatically your role in the raid based on your skill tree.
-## Notes-deDE: Setz automatisch deine Rolle im Raid basierend auf dem Talentbaum.
-## eMail: aeldra@sonnenkinder.org
-## URL: http://magnanimous-majesty.de
-## DefaultState: Enabled
-## LoadOnDemand: 0
-## SavedVariablesPerCharacter: SMARTROLESETTER_Options
+## Title: SmartRoleSetter
+## Version: 0.1
+## Author: EvilPaul
+## Notes: Automatically sets your role in the raid based on your skill tree.
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
 
 SmartRoleSetter.lua
