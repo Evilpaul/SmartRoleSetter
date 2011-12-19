@@ -8,7 +8,6 @@ local role = 'NONE';
 local isRoleSet = false;
 local doCheck = false;
 local tTime = 0;
-local isInit = false;
 
 local _, pc = UnitClass('player');
 
@@ -70,8 +69,6 @@ end
 
 
 function SmartRoleSetter_OnEvent(self, event, ...)
-	if (not isInit) then return; end
-
 	if (event == 'PLAYER_TALENT_UPDATE') then
 		CheckRole(true);
 		SetRole(role, false);
