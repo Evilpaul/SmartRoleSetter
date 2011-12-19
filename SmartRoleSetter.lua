@@ -83,7 +83,8 @@ function SmartRoleSetter_OnEvent(self, event, ...)
 	end
 
 	if (event == 'RAID_ROSTER_UPDATE' or event == 'PARTY_MEMBERS_CHANGED') then
-		doCheck = true;
+		CheckRole(true);
+		SetRole(role, false);
 	end
 end
 
