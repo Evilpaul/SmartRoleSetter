@@ -4,7 +4,6 @@ local sRoleHeal = 'HEALER'
 local sRoleNone = 'NONE'
 
 local frame = CreateFrame('Frame', 'SmartRoleSetterFrame', UIParent)
-frame:SetScript('OnEvent', SmartRoleSetter_OnEvent)
 frame:RegisterEvent('PLAYER_TALENT_UPDATE')
 frame:RegisterEvent('RAID_ROSTER_UPDATE')
 frame:RegisterEvent('ROLE_POLL_BEGIN')
@@ -72,7 +71,7 @@ local function CheckRole()
 end
 
 
-function SmartRoleSetter_OnEvent(self, event, ...)
+frame:SetScript('OnEvent', function(self, event, ...)
 	if (event == 'ROLE_POLL_BEGIN') then
 		local role = CheckRole()
 		UnitSetRole('player', role)
@@ -84,4 +83,4 @@ function SmartRoleSetter_OnEvent(self, event, ...)
 			UnitSetRole('player', role)
 		end
 	end
-end
+end)
