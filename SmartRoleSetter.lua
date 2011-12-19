@@ -4,7 +4,7 @@ local sRoleHeal = 'HEALER'
 local sRoleNone = 'NONE'
 
 local frame = nil
-local role = 'NONE'
+local role = sRoleNone
 local isRoleSet = false
 
 local _, pc = UnitClass('player')
