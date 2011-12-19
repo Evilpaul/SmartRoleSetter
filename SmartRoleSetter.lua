@@ -1,97 +1,97 @@
-local sRoleDmg	= 'DAMAGER';
-local sRoleTank = 'TANK';
-local sRoleHeal = 'HEALER';
-local sRoleNone = 'NONE';
+local sRoleDmg	= 'DAMAGER'
+local sRoleTank = 'TANK'
+local sRoleHeal = 'HEALER'
+local sRoleNone = 'NONE'
 
-local frame = nil;
-local role = 'NONE';
-local isRoleSet = false;
-local doCheck = false;
-local tTime = 0;
+local frame = nil
+local role = 'NONE'
+local isRoleSet = false
+local doCheck = false
+local tTime = 0
 
-local _, pc = UnitClass('player');
+local _, pc = UnitClass('player')
 
 local function CheckRole(force)
-	if (not force and role ~= sRoleNone) then return; end
+	if (not force and role ~= sRoleNone) then return end
 
-	local cr = 0;
+	local cr = 0
 
-	local iPTT = GetPrimaryTalentTree();
-	local roleOld = UnitGroupRolesAssigned('player');
+	local iPTT = GetPrimaryTalentTree()
+	local roleOld = UnitGroupRolesAssigned('player')
 
 	if (iPTT == nil) then
-		role = sRoleNone;
-		return;
+		role = sRoleNone
+		return
 	end
 
 	if (pc == 'ROGUE' or pc == 'HUNTER' or pc == 'MAGE' or pc == 'WARLOCK') then
-		role = sRoleDmg;
+		role = sRoleDmg
 	elseif (pc == 'DRUID') then
-		if (iPTT == 1) then role = sRoleDmg;
+		if (iPTT == 1) then role = sRoleDmg
 		elseif (iPTT == 2) then
-			_, _, _, _, cr = GetTalentInfo(iPTT, 19);
+			_, _, _, _, cr = GetTalentInfo(iPTT, 19)
 			if (cr == 2) then
-				role = sRoleDmg;
+				role = sRoleDmg
 			else
-				role = sRoleTank;
+				role = sRoleTank
 			end
-		elseif (iPTT == 3) then role = sRoleHeal; end
+		elseif (iPTT == 3) then role = sRoleHeal end
 	elseif (pc == 'PALADIN') then
-		if (iPTT == 1) then role = sRoleHeal;
-		elseif (iPTT == 2) then role = sRoleTank;
-		elseif (iPTT == 3) then role = sRoleDmg; end
+		if (iPTT == 1) then role = sRoleHeal
+		elseif (iPTT == 2) then role = sRoleTank
+		elseif (iPTT == 3) then role = sRoleDmg end
 	elseif (pc == 'PRIEST') then
-		if (iPTT == 1 or iPTT == 2) then role = sRoleHeal;
-		elseif (iPTT == 3) then role = sRoleDmg; end
+		if (iPTT == 1 or iPTT == 2) then role = sRoleHeal
+		elseif (iPTT == 3) then role = sRoleDmg end
 	elseif (pc == 'SHAMAN') then
-		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg;
-		elseif (iPTT == 3) then role = sRoleHeal; end
+		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg
+		elseif (iPTT == 3) then role = sRoleHeal end
 	elseif (pc == 'WARRIOR') then
-		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg;
-		elseif (iPTT == 3) then role = sRoleTank; end
+		if (iPTT == 1 or iPTT == 2) then role = sRoleDmg
+		elseif (iPTT == 3) then role = sRoleTank end
 	elseif (pc == 'DEATHKNIGHT') then
-		if (iPTT == 1) then role = sRoleTank;
-		elseif (iPTT == 2 or iPTT == 3) then role = sRoleDmg; end
+		if (iPTT == 1) then role = sRoleTank
+		elseif (iPTT == 2 or iPTT == 3) then role = sRoleDmg end
 	end
 
-	--local canBeTank, canBeHealer, canBeDamager = UnitGetAvailableRoles('player');	
+	--local canBeTank, canBeHealer, canBeDamager = UnitGetAvailableRoles('player')	
 	if (roleOld ~= role) then
-		isRoleSet = false;
+		isRoleSet = false
 	end
 end
 
 
 local function SetRole(r, isPoll)
-	if (r == nil or r == sRoleNone or isRoleSet or (not isPoll and GetNumRaidMembers() <= 0)) then return; end
-	isRoleSet = true;
-	UnitSetRole('player', r);
+	if (r == nil or r == sRoleNone or isRoleSet or (not isPoll and GetNumRaidMembers() <= 0)) then return end
+	isRoleSet = true
+	UnitSetRole('player', r)
 end
 
 
 function SmartRoleSetter_OnEvent(self, event, ...)
 	if (event == 'PLAYER_TALENT_UPDATE') then
-		CheckRole(true);
-		SetRole(role, false);
+		CheckRole(true)
+		SetRole(role, false)
 	end
 
 	if (event == 'ROLE_POLL_BEGIN') then
-		role = sRoleNone;
-		CheckRole(true);
-		isRoleSet = false;
-		SetRole(role, true);
-		StaticPopupSpecial_Hide(RolePollPopup);
+		role = sRoleNone
+		CheckRole(true)
+		isRoleSet = false
+		SetRole(role, true)
+		StaticPopupSpecial_Hide(RolePollPopup)
 	end
 
 	if (event == 'RAID_ROSTER_UPDATE' or event == 'PARTY_MEMBERS_CHANGED') then
-		CheckRole(true);
-		SetRole(role, false);
+		CheckRole(true)
+		SetRole(role, false)
 	end
 end
 
 
-frame = CreateFrame('Frame', 'SmartRoleSetterFrame', UIParent);
-frame:SetScript('OnEvent', SmartRoleSetter_OnEvent);
-frame:RegisterEvent('PLAYER_TALENT_UPDATE');
-frame:RegisterEvent('RAID_ROSTER_UPDATE');
-frame:RegisterEvent('ROLE_POLL_BEGIN');
-frame:RegisterEvent('PARTY_MEMBERS_CHANGED');
+frame = CreateFrame('Frame', 'SmartRoleSetterFrame', UIParent)
+frame:SetScript('OnEvent', SmartRoleSetter_OnEvent)
+frame:RegisterEvent('PLAYER_TALENT_UPDATE')
+frame:RegisterEvent('RAID_ROSTER_UPDATE')
+frame:RegisterEvent('ROLE_POLL_BEGIN')
+frame:RegisterEvent('PARTY_MEMBERS_CHANGED')
