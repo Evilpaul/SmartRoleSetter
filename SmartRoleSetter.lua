@@ -72,24 +72,16 @@ local function CheckRole()
 end
 
 
-local function SetRole(role, isPoll)
-	if (role == nil or (not isPoll and GetNumRaidMembers() == 0)) then
-		return
-	end
-	UnitSetRole('player', role)
-end
-
-
 function SmartRoleSetter_OnEvent(self, event, ...)
 	if (event == 'ROLE_POLL_BEGIN') then
 		local role = CheckRole()
-		SetRole(role, true)
+		UnitSetRole('player', role)
 		StaticPopupSpecial_Hide(RolePollPopup)
 	else
 		local roleOld = UnitGroupRolesAssigned('player')
 		local role = CheckRole()
-		if(role ~= roleOld) then
-			SetRole(role, false)
+		if((role ~= roleOld) and (GetNumRaidMembers() > 0)) then
+			UnitSetRole('player', role)
 		end
 	end
 end
