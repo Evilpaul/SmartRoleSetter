@@ -54,7 +54,6 @@ local function CheckRole(force)
 		elseif (iPTT == 2 or iPTT == 3) then role = sRoleDmg end
 	end
 
-	--local canBeTank, canBeHealer, canBeDamager = UnitGetAvailableRoles('player')	
 	if (roleOld ~= role) then
 		isRoleSet = false
 	end
