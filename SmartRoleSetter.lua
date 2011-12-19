@@ -6,8 +6,6 @@ local sRoleNone = 'NONE'
 local frame = nil
 local role = 'NONE'
 local isRoleSet = false
-local doCheck = false
-local tTime = 0
 
 local _, pc = UnitClass('player')
 
