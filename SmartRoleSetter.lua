@@ -14,8 +14,6 @@ local _, pc = UnitClass('player')
 local function CheckRole(force)
 	if (not force and role ~= sRoleNone) then return end
 
-	local cr = 0
-
 	local iPTT = GetPrimaryTalentTree()
 	local roleOld = UnitGroupRolesAssigned('player')
 
@@ -29,7 +27,7 @@ local function CheckRole(force)
 	elseif (pc == 'DRUID') then
 		if (iPTT == 1) then role = sRoleDmg
 		elseif (iPTT == 2) then
-			_, _, _, _, cr = GetTalentInfo(iPTT, 19)
+			local _, _, _, _, cr = GetTalentInfo(iPTT, 19)
 			if (cr == 2) then
 				role = sRoleDmg
 			else
